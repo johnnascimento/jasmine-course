@@ -1,3 +1,72 @@
 body {
-    
+    font-family: Roboto, arial, sans-serif, helvetica;
+}
+
+.simpleCalculator_title_wrapper,
+.simpleCalculator_form_wrapper,
+.simpleCalculator_result_wrapper {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.simpleCalculator_title_wrapper {
+    grid-area: calculatorTitle;
+    font-size: 25px;
+}
+
+.simpleCalculator_form_wrapper {
+    grid-area: calculatorForm;
+}
+
+.simpleCalculator_form {
+    padding: 0 16px 0 0;
+}
+
+.simpleCalculator_form_input {
+    padding: 0 16px;
+    border: 2px solid rgb(109,168,187);
+    text-align: center;
+    font-size: 18px;
+
+}
+
+.simpleCalculator_form,
+.simpleCalculator_form_input {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    position: relative;
+}
+
+
+.simpleCalculator_result_wrapper {
+    display: flex;
+    position: relative;
+    flex-flow: column;
+    gap: 8px;
+    grid-area: calculatorResult
+}
+
+.simpleCalculator_result_title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.simpleCalculator {
+    display: grid;
+    position: relative;
+    padding: 16px;
+    margin: 0 auto;
+    grid-column-gap: 8px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+        "calculatorTitle calculatorTitle"
+        "calculatorForm calculatorResult";
+    background-color: lightblue;
+    border: 4px double rgb(109,168,187);
+    border-radius: 5px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
 }
