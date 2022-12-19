@@ -3,6 +3,7 @@
 /**
  * @class
  * @constructor
+ * @Description Calculator constructor used mainly to create a calculator which divide, multiply, add and subtract values.
  */
 class Calculator {
     constructor() {
