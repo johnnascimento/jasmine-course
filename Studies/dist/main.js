@@ -128,7 +128,9 @@ class Calculate extends Calculator {
     printValue(inputValue) {
         this.resetTotal().handleInputValue(inputValue).addInitialValue().handleOperation().updateResult();
 
-        return console.log('this.result is: ', this.result);
+        console.log('this.result is: ', this.result);
+
+        return this;
     }
 }
 
