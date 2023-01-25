@@ -178,18 +178,10 @@ describe('main.js', function () {
                 });
 
                 it('Should add value based on the value passed in', function () {
-                    spyOn(Calculate.prototype, 'add');
+                    spyOn(Calculate.prototype, 'add').and.callThrough();
 
                     this.valuePassedIn = '5+3';
-
-                    // this.calculate1.handleInputValue(this.valuePassedIn).addInitialValue();
-
                     this.calculate1.printValue(this.valuePassedIn);
-
-                    console.log('this.calculate1.numbers.numberA', this.calculate1.numbers.numberA);
-                    console.log('this.calculate1.numbers.numberB', this.calculate1.numbers.numberB);
-
-                    // this.calculate1.handleOperation();
 
                     expect(Calculate.prototype.add).toHaveBeenCalledTimes(2);
                     expect(Calculate.prototype.add).toHaveBeenCalledWith(5);
@@ -197,42 +189,39 @@ describe('main.js', function () {
                 });
 
                 it('Should subtract value based on the value passed in', function () {
+                    spyOn(Calculate.prototype, 'add').and.callThrough();
+                    spyOn(Calculate.prototype, 'subtract').and.callThrough();
+
                     this.valuePassedIn = '5-3';
+                    this.calculate1.printValue(this.valuePassedIn);
 
-                    this.calculate1.handleInputValue(this.valuePassedIn).addInitialValue();
-
-                    console.log('this.calculate1.numbers.numberA', this.calculate1.numbers.numberA);
-                    console.log('this.calculate1.numbers.numberB', this.calculate1.numbers.numberB);
-
-                    this.calculate1.handleOperation();
-
-                    expect(this.calculate1.result).toBe(2);
+                    expect(this.calculate1.finalResult).toBe(2);
+                    expect(Calculate.prototype.add).toHaveBeenCalledTimes(1);
+                    expect(Calculate.prototype.add).toHaveBeenCalledWith(5);
+                    expect(Calculate.prototype.subtract).toHaveBeenCalledTimes(1);
+                    expect(Calculate.prototype.subtract).toHaveBeenCalledWith(3);
                 });
 
                 it('Should multiply value based on the value passed in', function () {
+                    spyOn(Calculate.prototype, 'multiply').and.callThrough();
+
                     this.valuePassedIn = '5*3';
-
-                    this.calculate1.handleInputValue(this.valuePassedIn).addInitialValue();
-
-                    console.log('calculate1.numbers.numberA', this.calculate1.numbers.numberA);
-                    console.log('this.calculate1.numbers.numberB', this.calculate1.numbers.numberB);
-
-                    this.calculate1.handleOperation();
+                    this.calculate1.printValue(this.valuePassedIn);
 
                     expect(this.calculate1.result).toBe(15);
+                    expect(Calculate.prototype.multiply).toHaveBeenCalledTimes(1);
+                    expect(Calculate.prototype.multiply).toHaveBeenCalledWith(3);
                 });
 
                 it('Should divide value based on the value passed in', function () {
+                    spyOn(Calculate.prototype, 'divide').and.callThrough();
+
                     this.valuePassedIn = '6/2';
-
-                    this.calculate1.handleInputValue(this.valuePassedIn).addInitialValue();
-
-                    console.log('this.calculate1.numbers.numberA', this.calculate1.numbers.numberA);
-                    console.log('this.calculate1.numbers.numberB', this.calculate1.numbers.numberB);
-
-                    this.calculate1.handleOperation();
+                    this.calculate1.printValue(this.valuePassedIn);
 
                     expect(this.calculate1.result).toBe(3);
+                    expect(Calculate.prototype.divide).toHaveBeenCalledTimes(1);
+                    expect(Calculate.prototype.divide).toHaveBeenCalledWith(2);
                 });
             })
         });
@@ -254,6 +243,28 @@ describe('main.js', function () {
 
             it('Should update the DOM with the calculator\'s result', function() {
                 expect(parseInt(this.element.innerText)).toBe(5);
+            });
+
+            it('Handling Errors on multiply method', function () {
+                const multiplySpy = spyOn(Calculator.prototype, 'multiply').and.throwError('some error');
+
+                this.calculate1.printValue('5*a')
+
+                expect(multiplySpy).toThrowError('some error');
+            });
+        });
+
+        describe('showVersion', function () {
+            it('Calls calculator.version', function () {
+                spyOn(document, 'getElementById').and.returnValue({
+                    innerText: null
+                });
+
+                const versionSpy = spyOnProperty(Calculator.prototype, 'version', 'get');
+
+                this.calculate1.showVersion();
+
+                expect(versionSpy).toHaveBeenCalled();
             });
         });
     });

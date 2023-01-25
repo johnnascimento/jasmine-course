@@ -21,6 +21,14 @@
 
         <script src="dist/calculator.js"></script>
         <script src="dist/calculator.spec.js"></script>
+        <script>
+            (function() {
+                window.addEventListener('DOMContentLoaded', function () {
+                    console.log('Dom loaded');
+                    calculator.showVersion();
+                });
+            })();
+        </script>
     </head>
     <body>
         <article class="simpleCalculator">
@@ -40,6 +48,13 @@
                 </div>
                 <div class="simpleCalculator_result" id="result">
                     Result placeholder
+                </div>
+            </section>
+
+            <section>
+                <div class="version">
+                    <span>Version:</span>
+                    <span id="version"></span>
                 </div>
             </section>
         </article>

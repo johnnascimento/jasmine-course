@@ -16,6 +16,14 @@ class Calculate extends Calculator {
         this.errorMsg = '';
     }
 
+    get finalResult() {
+        return this.result;
+    }
+
+    set defineResult(result) {
+        this.result = result;
+    }
+
     getNumbers(inputValue) {
         let splitNumbers = inputValue.split(this.expression),
             numberA = parseInt(splitNumbers[0]),
@@ -86,26 +94,34 @@ class Calculate extends Calculator {
 
         switch (this.specialChars) {
             case '+':
-                this.result = this.add(this.numbers.numberB);
+                let addedValue = this.add(this.numbers.numberB);
+
+                this.defineResult = addedValue;
                 console.log('Add this.result', this.result);
                 break;
 
             case '-':
-                this.result = this.subtract(this.numbers.numberB);
+                let subtractedValue = this.subtract(this.numbers.numberB);
+
+                this.defineResult = subtractedValue;
                 console.log('subtract this.result', this.result);
                 break;
 
             case '*':
-                this.result = this.multiply(this.numbers.numberB);
+                let multipliedValue = this.multiply(this.numbers.numberB);
+
+                this.defineResult = multipliedValue;
                 console.log('multiply this.result', this.result);
                 break;
 
             case '/':
-                this.result = this.divide(this.numbers.numberB);
+                let dividedValue = this.divide(this.numbers.numberB);
+
+                this.defineResult = dividedValue;
                 console.log('divide this.result', this.result);
                 break;
             default:
-                this.result = this.errorMsg;
+                this.defineResult = this.errorMsg;
                 console.log('this.errorMsg', this.errorMsg);
                 break;
         }
@@ -119,7 +135,7 @@ class Calculate extends Calculator {
         console.log('$resultElem', $resultElem);
 
         if ($resultElem) {
-            $resultElem.innerText = this.result;
+            $resultElem.innerText = this.finalResult;
         }
 
         return this;
@@ -128,9 +144,19 @@ class Calculate extends Calculator {
     printValue(inputValue) {
         this.resetTotal().handleInputValue(inputValue).addInitialValue().handleOperation().updateResult();
 
-        console.log('this.result is: ', this.result);
+        console.log('this.result is: ', this.finalResult);
 
         return this;
+    }
+
+    showVersion() {
+        const calculator = new Calculator();
+        const element = document.getElementById('version');
+
+        console.log('calculator', calculator);
+        console.log('element', element);
+
+        element.innerText = calculator.version;
     }
 }
 
