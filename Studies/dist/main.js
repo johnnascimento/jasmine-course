@@ -156,7 +156,10 @@ class Calculate extends Calculator {
         console.log('calculator', calculator);
         console.log('element', element);
 
-        element.innerText = calculator.version;
+        calculator.version
+          .then(function(version) {
+            element.innerText = version;
+          });
     }
 }
 

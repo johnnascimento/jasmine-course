@@ -30,7 +30,17 @@ class Calculator {
 
 Object.defineProperty(Calculator.prototype, 'version', {
     get: function() {
-        return 0.1
+        return fetch('dist/resources/simple-calculator-data.json')
+          .then(function(result) {
+            console.log('result', result)
+            
+            return result.json();
+          })
+          .then(function(json) {
+            console.log('json', json)
+          
+            return json.version;
+          });
     },
     enumerable: true,
     configurable: true

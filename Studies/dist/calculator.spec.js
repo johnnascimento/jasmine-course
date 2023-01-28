@@ -159,6 +159,16 @@ describe('calculator.js', function () {
                     }).toThrowError(Error, 'You can\'t divide a number by zero');
                 });
             });
+            
+            describe('Get version', function() {
+              it('Fetches version from another source', function (done) {
+                  calculator.version.then(function(version) {
+                    expect(version).toBe('0.1');
+                    
+                    done();
+                  });
+              });
+            })
         });
     });
 });
