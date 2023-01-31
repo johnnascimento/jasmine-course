@@ -159,15 +159,30 @@ describe('calculator.js', function () {
                     }).toThrowError(Error, 'You can\'t divide a number by zero');
                 });
             });
-            
-            describe('Get version', function() {
-              it('Fetches version from another source', function (done) {
-                  calculator.version.then(function(version) {
+
+            describe('Get version using Promises', function() {
+                it('Fetches version from another source', function (done) {
+                    spyOn(window, 'fetch').and.returnValue(Promise.resolve(
+                        new Response('{ "version": "0.1" }')
+                    ));
+
+                    calculator.version.then(function(version) {
+                        expect(version).toBe('0.1');
+
+                        done();
+                    });
+                });
+            })
+
+            describe('Get version using Async / Await', function() {
+                it('Fetches version from another source', async function () {
+                    spyOn(window, 'fetch').and.returnValue(Promise.resolve(
+                        new Response('{ "version": "0.1" }')
+                    ));
+
+                    const version = await calculator.version;
                     expect(version).toBe('0.1');
-                    
-                    done();
-                  });
-              });
+                });
             })
         });
     });

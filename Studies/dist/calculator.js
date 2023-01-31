@@ -30,17 +30,17 @@ class Calculator {
 
 Object.defineProperty(Calculator.prototype, 'version', {
     get: function() {
-        return fetch('dist/resources/simple-calculator-data.json')
-          .then(function(result) {
-            console.log('result', result)
-            
-            return result.json();
-          })
-          .then(function(json) {
-            console.log('json', json)
-          
-            return json.version;
-          });
+        return fetch('https://raw.githubusercontent.com/johnnascimento/jasmine-course/main/Studies/calculator-data.json')
+            .then(function(result) {
+                console.log('result', result)
+
+                return result.json();
+            })
+            .then(function(json) {
+                console.log('json', json)
+
+                return json.version;
+            });
     },
     enumerable: true,
     configurable: true

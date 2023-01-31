@@ -255,16 +255,20 @@ describe('main.js', function () {
         });
 
         describe('showVersion', function () {
-            it('Calls calculator.version', function () {
+            it('Calls calculator.version', function (done) {
                 spyOn(document, 'getElementById').and.returnValue({
                     innerText: null
                 });
 
-                const versionSpy = spyOnProperty(Calculator.prototype, 'version', 'get');
+                const versionSpy = spyOnProperty(Calculator.prototype, 'version', 'get').and.returnValue(
+                    Promise.resolve()
+                );
 
                 this.calculate1.showVersion();
 
                 expect(versionSpy).toHaveBeenCalled();
+
+                done();
             });
         });
     });

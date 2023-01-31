@@ -157,9 +157,9 @@ class Calculate extends Calculator {
         console.log('element', element);
 
         calculator.version
-          .then(function(version) {
-            element.innerText = version;
-          });
+            .then(function(version) {
+                element.innerText = version;
+            });
     }
 }
 
