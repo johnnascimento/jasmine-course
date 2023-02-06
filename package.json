@@ -27,6 +27,8 @@
     "karma-coverage": "^2.2.0",
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-matchers": "^5.0.0",
+    "puppeteer": "^14.4.1",
     "puppeteer-core": "^19.6.3"
-  }
+  },
+  "dependencies": {}
 }
