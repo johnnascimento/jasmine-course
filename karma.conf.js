@@ -1,13 +1,14 @@
+const process = require('process');
 process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 module.exports = function (config) {
     config.set({
         frameworks: ['jasmine', 'jasmine-matchers'],
         preprocessors: {
-            '*.js': ['coverage']
+            './dist/*.js': ['coverage']
         },
         files: [
-            './dist/custom-matchers.js',
+            "./dist/custom-matchers.js",
             './dist/*.js',
             './dist/*.spec.js'
         ],
@@ -17,15 +18,15 @@ module.exports = function (config) {
             'karma-chrome-launcher',
             'karma-coverage'
         ],
-        reports: [
-            'dots',
-            'progress',
-            'coverage'
-        ],
-        color: true,
-        browsers: [
-            'ChromeHeadless'
-        ],
+        browsers: ['HeadlessChrome'],
+        customLaunchers:{
+            HeadlessChrome:{
+                base: 'ChromeHeadless',
+                flags: ['--no-sandbox']
+            }
+        },
+        reporters: ['dots', 'coverage', 'progress'],
+        colors: true,
         singleRun: true,
         coverageReporter: {
             dir: 'coverage/',
@@ -36,5 +37,5 @@ module.exports = function (config) {
                 }
             ]
         }
-    });
+    })
 };
