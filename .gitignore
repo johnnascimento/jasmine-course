@@ -1,3 +1,3 @@
-node_modules
 node_modules/
-jasmine-casts-1.0.zip
+coverage/
+jasmine-casts-1.0/
